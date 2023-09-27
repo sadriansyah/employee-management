@@ -1,0 +1,23 @@
+{
+    "users": [
+        {
+            "id":1,
+            "username": "admin",
+            "password": "password"
+        }
+    ],
+    "employee" : [
+        {
+            "id": 1,
+            "username" : "Sandika",
+            "firstName" : "Sandi",
+            "lastName" : "Andika",
+            "email" : "sandika@test.com",
+            "birthDate": "2023-08-31T17:00:00.000Z",
+            "basicSalary": 10000000,
+            "status": "Active",
+            "group": "Sales",
+            "description": "Employee in the Sales Department"
+        }
+    ]
+}
