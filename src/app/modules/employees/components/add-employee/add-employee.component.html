@@ -4,89 +4,123 @@
             Form Employee
         </div>
         <div class="p-6">
-            <form data-te-validation-init>
-                <div class="grid grid-cols-2 gap-3">
-                    <div class="relative mb-3" data-te-input-wrapper-init>
+            <form [formGroup]="employeeForm"  (ngSubmit)="onSubmit()">
+                <div class="grid grid-cols-2 gap-5">
+                    <div class="relative mb-3" 
+                    id="firstName" data-te-input-wrapper-init>
                         <input
+                        formControlName="firstName"
+                        id="inputFirstName"
                         type="text"
                         class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                         placeholder="Insert First Name" />
                         <label
+                        for="inputFirstName"
                         class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
                         >First Name
                         </label>
+                        <small *ngIf="submitted && form['firstName'].errors" class="absolute top-full left-0 m-1 w-auto text-sm text-[#dc4c64] animate-[fade-in_0.3s_both]"><span *ngIf="form['firstName'].errors['required']">This is required</span></small>
                     </div>
-                    <div class="relative mb-3" data-te-input-wrapper-init>
+                    <div class="relative mb-3" data-te-input-wrapper-init id="lastName">
                         <input
+                        id="inputLastName"
+                        formControlName="lastName"
                         type="text"
                         class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                         placeholder="Last Name" />
                         <label
+                        for="inputLastName"
                         class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
                         >Last Name
                         </label>
+                        <small *ngIf="submitted && form['lastName'].errors" class="absolute top-full left-0 m-1 w-auto text-sm text-[#dc4c64] animate-[fade-in_0.3s_both]"><span *ngIf="form['lastName'].errors['required']">This is required</span></small>
                     </div>
-                    <div class="relative mb-3" data-te-input-wrapper-init>
+                    <div class="relative mb-3" data-te-input-wrapper-init id="username">
                         <input
+                        id="inputUsername"
+                        formControlName="username"
                         type="text"
                         class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                        id="exampleFormAdvancedInput1"
                         placeholder="Example label" />
                         <label
-                        for="exampleFormAdvancedInput1"
+                        for="inputUsername"
                         class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
                         >Username
                         </label>
+                        <small *ngIf="submitted && form['username'].errors" class="absolute top-full left-0 m-1 w-auto text-sm text-[#dc4c64] animate-[fade-in_0.3s_both]"><span *ngIf="form['username'].errors['required']">This is required</span></small>
                     </div>
-                    <div class="relative mb-3" data-te-input-wrapper-init>
+                    <div class="relative mb-3" data-te-input-wrapper-init id="email">
                         <input
+                        id="inputEmail"
+                        formControlName="email"
                         type="email"
                         class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                        id="exampleFormAdvancedInput1"
                         placeholder="Example label" />
                         <label
-                        for="exampleFormAdvancedInput1"
+                        for="inputEmail"
                         class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
                         >Email
                         </label>
+                        <small *ngIf="submitted && form['email'].errors" class="absolute top-full left-0 m-1 w-auto text-sm text-[#dc4c64] animate-[fade-in_0.3s_both]">
+                            <span *ngIf="form['email'].errors['required']">This is required</span>
+                            <span *ngIf="form['email'].errors['email']">Value should be valid email</span>
+                        </small>
+                        
                     </div>
-                    <div class="relative mb-3" data-te-date-timepicker-init data-te-disable-future="true" data-te-input-wrapper-init>
+                    <div class="relative mb-3" 
+                    id="birth" data-te-date-timepicker-init data-te-disable-future="true" data-te-input-wrapper-init>
                         <input
                             type="text"
+                            id="inputBirth"
+                            formControlName="birthDate"
                             class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                             placeholder="Select a date" />
                         <label
-                            for="floatingInput"
+                            for="inputBirth"
                             class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                            >Birth Date</label
-                        >
+                            >Birth Date</label>
+                            <small *ngIf="submitted && form['birthDate'].errors" class="absolute top-full left-0 m-1 w-auto text-sm text-[#dc4c64] animate-[fade-in_0.3s_both]">
+                                <span *ngIf="form['birthDate'].errors['required']">This is required</span>
+                                <span *ngIf="form['birthDate'].errors['birthDateInvalid']">Date should be less than now</span>
+                            </small>
                     </div>
-                    <div class="relative mb-3" data-te-input-wrapper-init>
+                    <div class="relative mb-3" data-te-input-wrapper-init id="salary">
                         <input
+                        id="inputSalary"
+                        formControlName="basicSalary"
                         type="number"
                         class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                        id="exampleFormAdvancedInput1"
                         placeholder="Example label" />
                         <label
-                        for="exampleFormAdvancedInput1"
+                        for="inputSalary"
                         class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
                         >Basic Salary
                         </label>
+                        <small *ngIf="submitted && form['basicSalary'].errors" class="absolute top-full left-0 m-1 w-auto text-sm text-[#dc4c64] animate-[fade-in_0.3s_both]">
+                            <span *ngIf="form['basicSalary'].errors['required']">This is required</span>
+                            <span *ngIf="form['basicSalary'].errors['pattern']">Salary should be number</span>
+                        </small>
                     </div>
-                    <div class="relative mb-3" data-te-input-wrapper-init>
+                    <div class="relative mb-3" data-te-input-wrapper-init id="status">
                         <input
+                        id="inputStatus"
+                        formControlName="status"
                         type="text"
                         class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                        id="exampleFormAdvancedInput1"
                         placeholder="Example label" />
                         <label
-                        for="exampleFormAdvancedInput1"
+                        for="inputStatus"
                         class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
                         >Status
                         </label>
+                        <small *ngIf="submitted && form['status'].errors" class="absolute top-full left-0 m-1 w-auto text-sm text-[#dc4c64] animate-[fade-in_0.3s_both]">
+                            <span *ngIf="form['status'].errors['required']">This is required</span>
+                        </small>
                     </div>
-                    <div class="relative mb-3" data-te-modal-body-ref>
+                    <div class="relative mb-3"  id="group">
                         <select
+                        id="selectGroup"
+                        formControlName="group"
                         data-te-select-init
                         data-te-select-filter="true">
                         <option value="Sales">Sales</option>
@@ -100,31 +134,37 @@
                         <option value="IT Operations">IT Operations</option>
                         <option value="Quality Assurance">Quality Assurance</option>
                         </select>
+                        <small *ngIf="submitted && form['group'].errors" class="absolute top-full left-0 m-1 w-auto text-sm text-[#dc4c64] animate-[fade-in_0.3s_both]">
+                            <span *ngIf="form['group'].errors['required']">This is required</span>
+                        </small>
                     </div>
                 </div>
                 <div class="grid">
-                    <div class="relative mb-3" data-te-input-wrapper-init>
+                    <div class="relative mb-3 mt-4" data-te-input-wrapper-init id="description">
                         <textarea
                             class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                            id="exampleFormControlTextarea1"
+                            id="inputDescription"
+                            formControlName="description"
                             rows="3"
                             placeholder="Your message"></textarea>
                         <label
-                            for="exampleFormControlTextarea1"
+                            for="inputDescription"
                             class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                            >Description</label
-                        >
+                            >Description</label>
+                            <small *ngIf="submitted && form['description'].errors" class="absolute top-full left-0 m-1 w-auto text-sm text-[#dc4c64] animate-[fade-in_0.3s_both]">
+                                <span *ngIf="form['description'].errors['required']">This is required</span>
+                            </small>
                     </div>
                 </div>
                 <div class="flex justify-end">
-                    <a (click)="navigateBack()"
+                    <a routerLink="/employee"
                         class="inline-block rounded mr-2 bg-danger px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#dc4c64] transition duration-150 ease-in-out hover:bg-danger-600 hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:bg-danger-600 focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:outline-none focus:ring-0 active:bg-danger-700 active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(220,76,100,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)]">
                         Cancel
                       </a>
                     <button
-                  type="button"
+                  type="submit"
                   class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                  data-te-submit-btn-ref>
+                  >
                   Save
                 </button>
                 </div>
