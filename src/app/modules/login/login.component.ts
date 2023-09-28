@@ -6,11 +6,11 @@ import {
 } from "tw-elements";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html'
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class AppComponent {
-  title = 'employee-management';
+export class LoginComponent {
   ngOnInit() {
     initTE({ Input, Ripple});
   }
