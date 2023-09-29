@@ -64,9 +64,9 @@
         data-te-dropdown-ref
         data-te-dropdown-alignment="end">
         <!-- Second dropdown trigger -->
-        <a
+        <button
           class="hidden-arrow flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
-          href="#"
+          (click)="logout"
           id="dropdownMenuButton2"
           role="button"
           data-te-dropdown-toggle-ref
@@ -78,7 +78,7 @@
             data-te-nav-link-ref
             >Logout</a
           >
-        </a>
+        </button>
       </div>
     </div>
   </div>

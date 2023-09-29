@@ -11,9 +11,11 @@ export class EmployeeService {
     constructor(private _http: HttpClient) {}
 
     getData() {
-        return this._http.get(this.apiUrl, {
-            params: new HttpParams().set('pageSize', '10').set('page',2)
-        });
+        return this._http.get(this.apiUrl);
+    }
+
+    findById(id: string) {
+        return this._http.get(`${this.apiUrl}/${id}`);
     }
 
     postData(employee: any) {

@@ -4,7 +4,12 @@
     class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
     <div
       class="border-b-2 flex justify-between border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
-      List Employee
+      <input
+      type="text"
+      [value]="search"
+      (keyup)="onSearch($event)"
+      class="min-w-0  rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+      placeholder="Search" />
       <a routerLink="/employee/create"
         class="inline-block rounded text-right bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
         Add New Employee
@@ -18,27 +23,28 @@
             <div class="overflow-hidden">
               <table class="min-w-full text-center text-sm font-light">
                 <thead
-                  class="border-b bg-neutral-800 font-medium text-white dark:border-neutral-500 dark:bg-neutral-900">
+                  class="border-b bg-blue-800 font-medium text-white dark:border-neutral-500 dark:bg-neutral-900">
                   <tr>
                     <th scope="col" class=" px-6 py-4">No</th>
-                    <th scope="col" class=" px-6 py-4">First Name</th>
-                    <th scope="col" class=" px-6 py-4">Last Name</th>
-                    <th scope="col" class=" px-6 py-4">Email</th>
-                    <th scope="col" class=" px-6 py-4">Salary</th>
-                    <th scope="col" class=" px-6 py-4">Group</th>
+                    <th scope="col" class=" px-6 py-4 cursor-pointer"><a (click)="sortByEmail()">Email <fa-icon [icon]="sortDirectionEmail === 1 ? sortUp : sortDown"></fa-icon></a></th>
+                    <th scope="col" class=" px-6 py-4 cursor-pointer"><a (click)="sortByFirstName()"> First Name <fa-icon [icon]="sortDirectionFirstName === 1 ? sortUp : sortDown"></fa-icon> </a></th>
+                    <th scope="col" class=" px-6 py-4 cursor-pointer"><a (click)="sortByLastName()"> Last Name<fa-icon [icon]="sortDirectionLastName === 1 ? sortUp : sortDown"></fa-icon></a></th>
+                    <th scope="col" class=" px-6 py-4 cursor-pointer"><a (click)="sortBySalary()">Salary <fa-icon [icon]="sortDirectionSalary === 1 ? sortUp : sortDown"></fa-icon></a></th>
+                    <th scope="col" class=" px-6 py-4 cursor-pointer"><a (click)="sortByGroup()">Group <fa-icon [icon]="sortDirectionGroup === 1 ? sortUp : sortDown"></fa-icon></a></th>
                     <th scope="col" class=" px-6 py-4">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-b dark:border-neutral-500" *ngFor="let employee of data; let i = index;">
-                    <td class="whitespace-nowrap  px-6 py-4 font-medium">{{ i+1 }}</td>
+                  <tr class="border-b dark:border-neutral-500" *ngFor="let employee of dataFilter | paginate: { itemsPerPage: tableSize, currentPage: page }; let i = index;">
+                    <td class="whitespace-nowrap  px-6 py-4 font-medium">{{ i+1 + ((page - 1) * tableSize) }}.</td>
+                    <td class="whitespace-nowrap  px-6 py-4 text-start"><a (click)="viewDetail(employee.id)" class="underline text-primary cursor-pointer">{{ employee.email }}</a></td>
                     <td class="whitespace-nowrap  px-6 py-4">{{ employee.firstName }}</td>
                     <td class="whitespace-nowrap  px-6 py-4">{{ employee.lastName }}</td>
-                    <td class="whitespace-nowrap  px-6 py-4">{{ employee.email }}</td>
-                    <td class="whitespace-nowrap  px-6 py-4">Rp {{ (employee.basicSalary).toLocaleString('en-Us') }}</td>
+                    <td class="whitespace-nowrap  px-6 py-4">Rp {{ (employee.basicSalary).toLocaleString('de-DE') }}</td>
                     <td class="whitespace-nowrap  px-6 py-4">{{ employee.group }}</td>
                     <td class="whitespace-nowrap  px-6 py-4">
                       <button type="button"
+                        (click)="viewEdit(employee.id)"
                         class="inline-block mr-2 rounded bg-warning px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#e4a11b] transition duration-150 ease-in-out hover:bg-warning-600 hover:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.3),0_4px_18px_0_rgba(228,161,27,0.2)] focus:bg-warning-600 focus:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.3),0_4px_18px_0_rgba(228,161,27,0.2)] focus:outline-none focus:ring-0 active:bg-warning-700 active:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.3),0_4px_18px_0_rgba(228,161,27,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(228,161,27,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.2),0_4px_18px_0_rgba(228,161,27,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.2),0_4px_18px_0_rgba(228,161,27,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(228,161,27,0.2),0_4px_18px_0_rgba(228,161,27,0.1)]">
                         Edit
                       </button>
@@ -60,33 +66,14 @@
     </div>
     <div
       class="border-t-2 flex justify-end border-neutral-100 px-6 py-3 items-end dark:border-neutral-600 dark:text-neutral-50">
-      <nav aria-label="Page navigation example">
-        <ul class="list-style-none flex">
-          <li>
-            <a
-              class="pointer-events-none relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-500 transition-all duration-300 dark:text-neutral-400">Previous</a>
-          </li>
-          <li>
-            <a class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100  dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
-              href="#!">1</a>
-          </li>
-          <li aria-current="page">
-            <a class="relative block rounded bg-primary-100 px-3 py-1.5 text-sm font-medium text-primary-700 transition-all duration-300"
-              href="#!">2
-              <span
-                class="absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0 [clip:rect(0,0,0,0)]">(current)</span>
-            </a>
-          </li>
-          <li>
-            <a class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
-              href="#!">3</a>
-          </li>
-          <li>
-            <a class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
-              href="#!">Next</a>
-          </li>
-        </ul>
-      </nav>
+      <select class="text-sm font-bold rounded border-2 border-black-700 text-gray-600 h-10 mb-2 w-12 pl-2 pr-2 bg-white hover:border-gray-400 focus:outline-none appearance-none" [value]="tableSize" (change)="onTableSizeChange($event)">
+        <option value="{{ i }}" *ngFor="let i of tableSizes">{{ i }}</option>
+      </select>
+      <pagination-controls 
+        previousLabel="Prev" 
+        nextLabel="Next"
+        (pageChange)="onTableDataChange($event)">
+      </pagination-controls>
     </div>
   </div>
 </div>

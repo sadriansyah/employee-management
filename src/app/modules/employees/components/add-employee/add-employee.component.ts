@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EmployeeService } from '../../services/employee.services';
+import { EmployeeService } from '../../../../services/employee.services';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import {
@@ -74,6 +74,14 @@ export class AddEmployeeComponent {
           this.router.navigate(['/employee'])
         });
     }
+  }
+
+  navigateBack() {
+    const queryParamsString = localStorage.getItem('queryParams');
+    const queryParams = queryParamsString ? JSON.parse(queryParamsString) : {};
+    this.router.navigate(['employee'], {
+      queryParams: queryParams,
+    });
   }
 
 }

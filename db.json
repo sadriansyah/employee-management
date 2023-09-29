@@ -1,11 +1,4 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "username": "admin",
-      "password": "password"
-    }
-  ],
   "employee": [
     {
       "id": 1,
@@ -42,18 +35,6 @@
       "status": "Inactive",
       "group": "Finance",
       "description": "Employee in the Finance Department"
-    },
-    {
-      "id": 4,
-      "username": "Gabriel42",
-      "firstName": "Lula",
-      "lastName": "Conroy",
-      "email": "Howard.Klocko64@gmail.com",
-      "birthDate": "3/29/2023, 1:47:55 AM",
-      "basicSalary": 5042,
-      "status": "Active",
-      "group": "Human Resources",
-      "description": "Employee in the Human Resources Department"
     },
     {
       "id": 5,
